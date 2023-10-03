@@ -1,0 +1,87 @@
+﻿@model Biblioteca_uts.Models.UsariosModels
+
+@{
+    ViewData["Title"] = "Registro";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        /* Add your custom CSS styles here */
+        body {
+            background-color: #121212;
+            color: #fff;
+        }
+
+        .registration-form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #1E1E1E;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+            .registration-form input {
+                margin-bottom: 10px;
+                padding: 10px;
+                background-color: #2E2E2E;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                color: #fff;
+            }
+
+            .registration-form button {
+                padding: 10px 20px;
+                background-color: #1877F2;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+                .registration-form button:hover {
+                    background-color: #1356A2;
+                }
+
+            .registration-form a {
+                color: #BB86FC;
+                text-decoration: none;
+                display: block;
+                text-align: center;
+                margin-top: 10px;
+            }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="registration-form">
+            <h2 class="text-center">Create an Account</h2>
+            <form asp-action="Registro" asp-controller="LoginR" method="post">
+                <input type="number" name="Identificador" asp-for="Identificador" class="form-control" placeholder="Identificador" required>
+                <input type="text" name="Nombres" asp-for="Nombres" class="form-control" placeholder="Nombres" required>
+                <input type="text" name="ApePa" asp-for="ApePa" class="form-control" placeholder="Apellido Paterno" required>
+                <input type="text" name="ApeMa" asp-for="ApeMa" class="form-control" placeholder="Apellido Materno" required>
+                <input type="text" name="Correo" asp-for="Correo" class="form-control" placeholder="Correo" required>
+                <input type="text" name="Calle" asp-for="Calle" class="form-control" placeholder="Calle" required>
+                <input type="text" name="Colonia" asp-for="Colonia" class="form-control" placeholder="Colonia" required>
+                <input type="text" name="NroCasa" asp-for="NroCasa" class="form-control" placeholder="Número de Casa" required>
+                <input type="text" name="tipo" asp-for="tipo" class="form-control" placeholder="Tipo" required>
+                <input type="password" name="Contraseña" asp-for="Contraseña" class="form-control" placeholder="Contraseña" required>
+                <input type="text" name="Usuario" asp-for="Usuario" class="form-control" placeholder="Usuario" required>
+                <button type="submit" class="btn btn-primary btn-block">REGISTER</button>
+                @if (ViewData["Mensaje"] != null)
+                {
+                    <div class="alert alert-danger mt-3" role="alert">
+                        @ViewData["Mensaje"]
+                    </div>
+                }
+                <span><a asp-action="Login" asp-controller="LoginR">ya tienes cuenta?</a></span>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

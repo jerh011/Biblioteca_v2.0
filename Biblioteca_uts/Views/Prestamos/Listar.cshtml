@@ -1,0 +1,111 @@
+﻿@model List<CMT_PrestamoModels>;
+
+@{
+    ViewData["Title"] = "Listar";
+    Layout = "_Layout";
+
+}
+<style>
+    body {
+        background-color: #0f0f0f;
+        color: #ffffff;
+    }
+
+    .card {
+        background-color: #1c1c1c;
+        border: 1px solid #333;
+    }
+
+    .card-header {
+        background-color: #272727;
+        border-bottom: 1px solid #333;
+        color: #ffcc00;
+    }
+
+    .btn-primary {
+        background-color: #ffcc00;
+        border-color: #ffcc00;
+        color: #fff;
+    }
+
+    .btn-danger {
+        background-color: #ff3344;
+        border-color: #ff3344;
+        color: #ffffff;
+    }
+
+    th, td {
+        border-color: #333;
+        color: #fff;
+    }
+
+    br {
+        margin: 20px 0;
+    }
+
+    .card {
+        /* Resto de estilos... */
+        width: 90%; /* Ajustar el ancho del contenedor .card */
+        margin: auto; /* Centrar el contenedor */
+    }
+
+    .table {
+        /* Resto de estilos... */
+        width: 100%; /* Hacer que la tabla ocupe todo el ancho del contenedor */
+    }
+</style>
+<div class="card col-8">
+    <div class="card-header">
+        Lista de Prestamos
+    </div>
+    <div class="card-body">
+        <a asp-action="Guardar" asp-asp-controller="Prestamos" class="btn btn-primary btn-sm">Crear nuevo</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Identificador</th>
+                    <th>Nombres</th>
+                    <th>Apellido Paterno</th>
+                    <th>Fecha Prestamo</th>
+                    <th>Fecha Devolucion</th>
+                    <th>Titulo del Libro</th>
+                    <th>Clasificacion</th>
+                    <th>IBSN</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Us_Identificador</td>
+                        <td>@item.Us_Nombres</td>
+                        <td>@item.Us_ApePa</td>
+                        <td>@item.Pre_Fecha_prestamo</td>
+                        <td>@item.Pre_Fecha_devolucion</td>
+                        <td>@item.Lib_Titulo</td>
+                        <td>@item.Lib_Clasificacion</td>
+                        <td>@item.Lib_IBSN</td>
+
+                        <td>
+                            <!--
+
+
+
+
+                            -->
+                            <a asp-action="Editar" asp-asp-controller="Prestamos" asp-route-IdPrestamo="@item.Pre_Id_Prestamo" class="btn btn-primary btn-sm">Editar</a>
+                            <a asp-action="Eliminar" asp-asp-controller="Prestamos" asp-route-IdPrestamo="@item.Pre_Id_Prestamo" class="btn btn-primary btn-sm">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+    @if (ViewData["Mensaje"] != null)
+    {
+        <div class="alert alert-danger mt-3" role="alert">
+            @ViewData["Mensaje"]
+        </div>
+    }
