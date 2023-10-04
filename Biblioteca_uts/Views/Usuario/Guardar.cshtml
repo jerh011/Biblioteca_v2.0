@@ -6,94 +6,100 @@
 }
 <style>
     /* Estilo futurista */
+    /* Estilos generales */
     body {
-        background-color: #f0f0f0;
-        font-family: 'Arial', sans-serif;
+        background-color: #121212;
+        color: #ffffff;
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
     }
 
-    #catalog {
-        padding: 50px 0;
-    }
-
-    .form-container {
+    /* Estilos para la barra de navegación */
+    .navbar {
         background-color: #333;
+        padding: 10px;
+        text-align: center;
+    }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+    /* Estilos para el pie de página */
+    .footer {
+        background-color: #333;
+        padding: 10px;
+        text-align: center;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+
+    /* Estilos para el formulario de registro */
+    .form-container {
+        padding: 20px;
         border-radius: 10px;
-        padding: 40px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-        color: #fff;
+        background: rgba(0, 0, 0, 0.7);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        width: 80%;
+        max-width: 400px;
+        text-align: center;
+        margin: 20px auto;
     }
 
     .title {
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 20px;
-    }
-
-    .form {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
+        font-size: 18px;
+        margin-bottom: 10px;
     }
 
     .input-group1 {
-        position: relative;
+        margin: 10px 0;
+        text-align: left;
     }
 
-        .input-group1 input {
+        .input-group1 label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .input-group1 input[type="number"],
+        .input-group1 input[type="text"],
+        .input-group1 input[type="password"],
+        .input-group1 input[type="date"] {
+            padding: 8px;
             width: 100%;
-            padding: 12px;
             border: none;
-            border-bottom: 1px solid #777;
-            background-color: transparent;
-            color: #fff;
-            transition: border-color 0.3s;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-size: 14px;
+            outline: none;
         }
 
-            .input-group1 input:focus {
-                outline: none;
-                border-color: #00aaff;
+            .input-group1 input[type="number"]::placeholder,
+            .input-group1 input[type="date"]::placeholder {
+                color: #aaaaaa;
             }
-
-            .input-group1 input::placeholder {
-                color: #999;
-            }
-
-        .input-group1::before {
-            content: "";
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background-color: #00aaff;
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s;
-        }
-
-        .input-group1 input:focus + ::before {
-            transform: scaleX(1);
-        }
-
-    .col-md-4 {
-        grid-column: span 2;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
 
     .sign {
-        background-color: #00aaff;
-        color: #fff;
+        display: inline-block;
+        padding: 10px 18px;
+        font-size: 16px;
+        background-color: #1e90ff;
+        color: #ffffff;
         border: none;
-        padding: 12px 20px;
-        border-radius: 5px;
+        border-radius: 10px;
         cursor: pointer;
         transition: background-color 0.3s;
     }
 
         .sign:hover {
-            background-color: #0077cc;
+            background-color: #007bff;
         }
 </style>
 <link href="~/css/regitro_libro.css" rel="stylesheet" />
@@ -108,47 +114,58 @@
 
                     <!--Identificador-->
                     <div class="input-group1">
+                        <label for="Identificador">Identificador</label>
                         <input type="number" name="Identificador" asp-for="Identificador" placeholder="Identificador" required>
                     </div>
                     <!--Nombres-->
                     <div class="input-group1">
+                        <label for="Nombres">Nombres</label>
                         <input type="text" name="Nombres" asp-for="Nombres" placeholder="Nombres" required>
                     </div>
                     <!--ApePa-->
                     <div class="input-group1">
+                        <label for="ApePa">Apellido Paterno</label>
                         <input type="text" asp-for="ApePa" name="ApePa" placeholder="ApePa" required>
                     </div>
                     <!--ApeMa-->
                     <div class="input-group1">
+                        <label for="ApeMa">Apellido Materno</label>
                         <input type="text" name="ApeMa" asp-for="ApeMa" placeholder="ApeMa" required>
                     </div>
                     <!--Correo-->
                     <div class="input-group1">
+                        <label for="Correo">Correo</label>
                         <input type="text" name="Correo" asp-for="Correo" placeholder="Correo" required>
                     </div>
 
                     <!--Calle-->
                     <div class="input-group1">
+                        <label for="Calle">Calle</label>
                         <input type="text" name="Calle" asp-for="Calle" placeholder="Calle" required>
                     </div>
                     <!--Colonia-->
                     <div class="input-group1">
+                        <label for="Colonia">Colonia</label>
                         <input type="text" name="Colonia" asp-for="Colonia" placeholder="Colonia" required>
                     </div>
                     <!--NroCasa-->
                     <div class="input-group1">
+                        <label for="NroCasa">Numero casa</label>
                         <input type="text" name="NroCasa" asp-for="NroCasa" placeholder="NroCasa" required>
                     </div>
                     <!--tipo-->
                     <div class="input-group1">
+                        <label for="tipo">Tipo</label>
                         <input type="text" name="tipo" asp-for="tipo" placeholder="tipo" required>
                     </div>
                     <!--Contraseña-->
                     <div class="input-group1">
+                        <label for="Contraseña">Contraseña</label>
                         <input type="password" name="Contraseña" asp-for="Contraseña" placeholder="Contraseña" required>
                     </div>
                     <!--Id_Lector/Usuario/-->
                     <div class="input-group1">
+                        <label for="Usuario">Usuario</label>
                         <input type="text" name="Usuario" asp-for="Usuario" placeholder="Usuario" required>
                     </div>
 
