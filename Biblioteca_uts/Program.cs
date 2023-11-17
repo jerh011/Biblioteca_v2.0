@@ -45,6 +45,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
        name: "default",
-    pattern: "{controller=LoginR}/{action=login}/{id?}");
-
+    //pattern: "{controller=LoginR}/{action=login}/{id?}");
+    pattern: "{controller=Libros}/{action=Listar}/{id?}");
 app.Run();
