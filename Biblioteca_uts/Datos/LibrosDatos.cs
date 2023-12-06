@@ -40,34 +40,37 @@ namespace Biblioteca_uts.Datos
             }
             return Lista;
         }
-        public LibrosModel ObtenerLibro(int IdContacto)
+        public LibrosModel ObtenerLibro(int IdLibro)
         {
-            LibrosModel _Contacto = new LibrosModel();
+            LibrosModel _libro = new LibrosModel();
             var cn = new Conexion();
             using (var conexion = new SqlConnection(cn.getCadenaSql()))
             {
                 conexion.Open();
+                //procedimiento almacenado que obtinene un libros mediante 
+                //entre todos los registros de la tabla libro 
                 SqlCommand cmd = new SqlCommand("Sp_Buscar_Libro", conexion);
-                cmd.Parameters.AddWithValue("No_Adquisicion", IdContacto);
+                cmd.Parameters.AddWithValue("No_Adquisicion", IdLibro);
                 cmd.CommandType = CommandType.StoredProcedure;
                 using (var dr = cmd.ExecuteReader())
                 {
                     while (dr.Read())
-                    {
-                        _Contacto.No_Adquisicion = Convert.ToInt32(dr["No_Adquisicion"]);
-                        _Contacto.Titulo = dr["Titulo"].ToString();
-                        _Contacto.Fecha_adquisicion = dr.GetDateTime(dr.GetOrdinal("Fecha_adquisicion"));
-                        _Contacto.Ibsn = dr["IBSN"].ToString();
-                        _Contacto.Clasificacion = dr["Clasificacion"].ToString();
-                        _Contacto.No_Estante = Convert.ToInt32(dr["No_Estante"]);
-                        _Contacto.Cantidad = Convert.ToInt32(dr["Cantidad"]);
-                        _Contacto.Estatus = dr["Estatus"].ToString();
-                        _Contacto.Procedencia = dr["Procedencia"].ToString();
-                        _Contacto.No_factura = dr["No_factura"].ToString();
+                    {   //Obtiene todos datos del libro   
+                        _libro.No_Adquisicion = Convert.ToInt32(dr["No_Adquisicion"]);
+                        _libro.Titulo = dr["Titulo"].ToString();
+                        _libro.Fecha_adquisicion = dr.GetDateTime(dr.GetOrdinal("Fecha_adquisicion"));
+                        _libro.Ibsn = dr["IBSN"].ToString();
+                        _libro.Clasificacion = dr["Clasificacion"].ToString();
+                        _libro.No_Estante = Convert.ToInt32(dr["No_Estante"]);
+                        _libro.Cantidad = Convert.ToInt32(dr["Cantidad"]);
+                        _libro.Estatus = dr["Estatus"].ToString();
+                        _libro.Procedencia = dr["Procedencia"].ToString();
+                        _libro.No_factura = dr["No_factura"].ToString();
                     }
                 }
             }
-            return _Contacto;
+            //retorna el libro
+            return _libro;
         }
         //############################################################################
         public bool GuardarLibro(LibrosModel model)
@@ -79,8 +82,10 @@ namespace Biblioteca_uts.Datos
                 using (var conexion = new SqlConnection(cn.getCadenaSql()))
                 {
                     conexion.Open();
+                    //Procedimineto almacenados para guarda registros de libros  
                     SqlCommand cmd = new SqlCommand("SP_Registrar_Libro", conexion);
 
+                    //resive datos de un todos los datos del libro registro
                     cmd.Parameters.AddWithValue("No_Adquisicion", model.No_Adquisicion);
                     cmd.Parameters.AddWithValue("Titulo", model.Titulo);
                     cmd.Parameters.AddWithValue("Fecha_adquisicion", model.Fecha_adquisicion);
@@ -114,7 +119,10 @@ namespace Biblioteca_uts.Datos
                 using (var conexion = new SqlConnection(cn.getCadenaSql()))
                 {
                     conexion.Open();
+                    //Procedimineto almacenados para Editar registros de Libro  
+
                     SqlCommand cmd = new SqlCommand("Sp_Modificar_Libro", conexion);
+                    //resive datos de un todos los datos del libro Libro
                     cmd.Parameters.AddWithValue("No_Adquisicion", model.No_Adquisicion);
                     cmd.Parameters.AddWithValue("Titulo", model.Titulo);
                     cmd.Parameters.AddWithValue("Fecha_adquisicion", model.Fecha_adquisicion);
@@ -147,6 +155,8 @@ namespace Biblioteca_uts.Datos
                 using (var conexion = new SqlConnection(cn.getCadenaSql()))
                 {
                     conexion.Open();
+                    //procedimineto almacenado para eliminar registro de un libro 
+                    //mediante su numero de adquisicion 
                     SqlCommand cmd = new SqlCommand("SP_Eliminar_Libro", conexion);
                     cmd.Parameters.AddWithValue("No_Adquisicion", No_Adquisicion);
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -195,10 +205,5 @@ namespace Biblioteca_uts.Datos
             }
             return Lista;
         }
-
-
-
-
-
     }
 }

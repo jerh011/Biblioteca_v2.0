@@ -50,6 +50,8 @@ namespace Biblioteca_uts.Datos
             using (var conexion = new SqlConnection(cn.getCadenaSql()))
             {
                 conexion.Open();
+                //procedimiento almacenado que obtinene un Usuario mediante 
+                //entre todos los registros de la tabla Usuario 
                 SqlCommand cmd = new SqlCommand("Sp_Buscar_Usuario", conexion);
                 cmd.Parameters.AddWithValue("Identificador", Identificador);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -57,7 +59,7 @@ namespace Biblioteca_uts.Datos
                 {
                     while (dr.Read())
                     {
-
+                        //Obtiene todos datos del Usuario  
                         Usuario.Identificador = Convert.ToInt32(dr["Identificador"]);
                         Usuario.Nombres = dr["Nombres"].ToString();
                         Usuario.ApePa = dr["ApePa"].ToString();
@@ -86,8 +88,10 @@ namespace Biblioteca_uts.Datos
                 using (var conexion = new SqlConnection(cn.getCadenaSql()))
                 {
                     conexion.Open();
+                    //Procedimineto almacenados para guarda registros de Usuario  
+
                     SqlCommand cmd = new SqlCommand("SP_Registrar_Usuario", conexion);
-                  
+                    //resive datos de un todos los datos del libro Usuario
                     cmd.Parameters.AddWithValue("Identificador", model.Identificador);
                     cmd.Parameters.AddWithValue("Nombres", model.Nombres);
                     cmd.Parameters.AddWithValue("ApePa", model.ApePa);
@@ -122,7 +126,11 @@ namespace Biblioteca_uts.Datos
                 using (var conexion = new SqlConnection(cn.getCadenaSql()))
                 {
                     conexion.Open();
+                    //Procedimineto almacenados para Editar registros de Libro  
+
                     SqlCommand cmd = new SqlCommand("Sp_Modificar_Usuario", conexion);
+                    //resive datos de un todos los datos del libro Libro
+
                     cmd.Parameters.AddWithValue("Identificador", model.Identificador);
                     cmd.Parameters.AddWithValue("Nombres", model.Nombres);
                     cmd.Parameters.AddWithValue("ApePa", model.ApePa);
@@ -156,6 +164,8 @@ namespace Biblioteca_uts.Datos
                 using (var conexion = new SqlConnection(cn.getCadenaSql()))
                 {
                     conexion.Open();
+                    //procedimineto almacenado para eliminar registro de un usuario 
+                    //mediante su numero de adquisicion
                     SqlCommand cmd = new SqlCommand("SP_Eliminar_Usuario", conexion);
                     cmd.Parameters.AddWithValue("Identificador",Identificador);
                     cmd.CommandType = CommandType.StoredProcedure;

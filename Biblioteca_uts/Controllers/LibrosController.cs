@@ -6,7 +6,7 @@ namespace Biblioteca_uts.Controllers
 {
     public class LibrosController : Controller
     {
-
+        
         //Datos/ContactoDatos
         LibrosDatos _LibrosDatos = new LibrosDatos();
         public IActionResult Listar()
@@ -24,8 +24,9 @@ namespace Biblioteca_uts.Controllers
         [HttpPost]
         public IActionResult Guardar(LibrosModel model)
         {
-            var UsuarioCreado = _LibrosDatos.GuardarLibro(model);
-            if (UsuarioCreado)
+            var _LibroCreado = _LibrosDatos.GuardarLibro(model);
+           
+            if (_LibroCreado)
             {
                 return RedirectToAction("Listar");
             }

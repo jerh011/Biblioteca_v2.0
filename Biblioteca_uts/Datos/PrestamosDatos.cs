@@ -39,8 +39,6 @@ namespace Biblioteca_uts.Datos
             return Lista;
         }
 
-
-
         public PrestamosModels ObtenerPrestamo(int IdPrestamo)
         {
             PrestamosModels _Prestamos = new PrestamosModels();
@@ -48,13 +46,16 @@ namespace Biblioteca_uts.Datos
             using (var conexion = new SqlConnection(cn.getCadenaSql()))
             {
                 conexion.Open();
+                //procedimiento almacenado que obtinene un Prestamo mediante 
+                //entre todos los registros de la tabla Prestamo
                 SqlCommand cmd = new SqlCommand("Sp_Buscar_Prestamos", conexion);
                 cmd.Parameters.AddWithValue("Id_Prestamo", IdPrestamo);
                 cmd.CommandType = CommandType.StoredProcedure;
                 using (var dr = cmd.ExecuteReader())
                 {
                     while (dr.Read())
-                    {
+                    {                      
+                        //Obtiene todos datos del Usuario  Prestamo
                         _Prestamos.IdPrestamo = Convert.ToInt32(dr["Id_Prestamo"]);
                         _Prestamos.Identificador = Convert.ToInt32(dr["Identificador"]);
                         _Prestamos.Fecha_prestamo = dr.GetDateTime(dr.GetOrdinal("Fecha_prestamo"));
@@ -75,7 +76,11 @@ namespace Biblioteca_uts.Datos
                 using (var conexion = new SqlConnection(cn.getCadenaSql()))
                 {
                     conexion.Open();
+                                       
+                    //Procedimineto almacenados para guarda registros de Usuario  
+
                     SqlCommand cmd = new SqlCommand("SP_Registrar_Prestamos", conexion);
+                    //resive datos de un todos los datos del libro Usuario
 
                     cmd.Parameters.AddWithValue("Identificador", model.Identificador);
                     cmd.Parameters.AddWithValue("Fecha_prestamo", model.Fecha_prestamo);
@@ -105,7 +110,11 @@ namespace Biblioteca_uts.Datos
                 using (var conexion = new SqlConnection(cn.getCadenaSql()))
                 {
                     conexion.Open();
+                    //Procedimineto almacenados para Editar registros de Prestamo  
+
                     SqlCommand cmd = new SqlCommand("Sp_Modificar_Prestamos", conexion);
+                    //resive datos de un todos los datos del Prestamo
+
                     cmd.Parameters.AddWithValue("Id_Prestamo", model.IdPrestamo);
                     cmd.Parameters.AddWithValue("Identificador", model.Identificador);
                     cmd.Parameters.AddWithValue("Fecha_prestamo", model.Fecha_prestamo);
@@ -133,6 +142,8 @@ namespace Biblioteca_uts.Datos
                 using (var conexion = new SqlConnection(cn.getCadenaSql()))
                 {
                     conexion.Open();
+                    //procedimineto almacenado para eliminar prestamo de un usuario 
+                    //mediante su numero de id prestamo
                     SqlCommand cmd = new SqlCommand("SP_Eliminar_Prestamos", conexion);
                     cmd.Parameters.AddWithValue("Id_Prestamo", IdPrestamo);
                     cmd.CommandType = CommandType.StoredProcedure;
